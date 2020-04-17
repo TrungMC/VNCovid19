@@ -3,7 +3,7 @@ name: CI Download VNCovid19 Infographic
 on:
   push:
     paths:
-    - 'scripts/download_at.py'
+    - 'downloadInfographic.py'
   schedule:
     - cron:  '*/10 * * * *'
 
