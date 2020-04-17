@@ -1,11 +1,8 @@
 name: CI Download VNCovid19 Infographic
 
 on:
-  push:
-    paths:
-    - 'downloadInfographic.py'
   schedule:
-    - cron:  '*/10 * * * *'
+    - cron:  '0 * * * *'
 
 jobs:
   build:
@@ -38,8 +35,4 @@ jobs:
           git add .
           git commit -m "Update VN Dataset" || echo "Nothing to update"
           git status
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          repository: covid19-eu-zh/covid19-eu-data
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+     
