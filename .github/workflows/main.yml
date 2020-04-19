@@ -3,7 +3,7 @@ name: CI Download VNCovid19 Infographic
 on:
 
   schedule:
-    - cron: '0/10 * * * *'
+    - cron: '0/30 * * * *'
 
   push:
     branches:
