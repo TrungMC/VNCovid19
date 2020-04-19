@@ -1,38 +1,33 @@
 name: CI Download VNCovid19 Infographic
-
+  
 on:
+
   schedule:
-    - cron:  '0 * * * *'
+    - cron: '0/10 * * * *'
 
+  push:
+    branches:
+      - master
 jobs:
-  build:
-
+  JsonUpgrades:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout current repo
-        uses: actions/checkout@v2
-      - name: Get current directory and files
-        run: |
-          pwd
-          ls
+      - uses: actions/checkout@v2
+
       - uses: actions/setup-python@v1
         with:
-          python-version: '3.7' # Version range or exact version of a Python version to use, using SemVer's version range syntax
-          architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
-      - name: Install Python Requirements
+          python-version: '3.7'
+
+      - name: Install dependencies
         run: |
-          python --version
+          python -m pip install --upgrade pip
           pip install -r requirements.txt
-      - name: Download Records
+      - name: Get countries Json
         run: |
           python downloadInfographic.py
-          ls data
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git pull
-          git status
+          git config --global user.name 'trungmc'
+          git config --global user.email 'trungmc@yahoo.com'
           git add .
-          git commit -m "Update VN Dataset" || echo "Nothing to update"
-          git status
-     
+          git commit --allow-empty -am "Update countries data"
+          git push
+          git status     
